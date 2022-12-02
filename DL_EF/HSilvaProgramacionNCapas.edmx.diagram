@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4446c56e0e2a486fa6a6db6db708b8f5" Name="Diagram1">
+        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Area" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Departamento" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Rol" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_Area" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Colonia" Width="1.5" PointX="7.5" PointY="6.125" />
+        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Direccion" Width="1.5" PointX="8.5" PointY="3.125" />
+        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Estado" Width="1.5" PointX="3" PointY="6.25" />
+        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Municipio" Width="1.5" PointX="5.25" PointY="6.25" />
+        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Pai" Width="1.5" PointX="0.75" PointY="6.375" />
+        <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_ColoniaMunicipio" />
+        <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_DireccionColonia" />
+        <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_EstadoPais" />
+        <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_MunicipioEstado" />
+        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Usuario" Width="1.5" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_DireccionUsuario" />
+        <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_Rol" />
+        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Producto" Width="1.5" PointX="10.25" PointY="0.75" />
+        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Proveedor" Width="1.5" PointX="10.875" PointY="4.625" />
+        <AssociationConnector Association="HSilvaProgramacionNCapasModel.FK__Producto__IdDepa__06CD04F7" />
+        <AssociationConnector Association="HSilvaProgramacionNCapasModel.FK__Producto__IdProv__05D8E0BE" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
