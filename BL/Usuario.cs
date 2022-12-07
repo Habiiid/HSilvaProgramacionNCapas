@@ -13,7 +13,7 @@ namespace BL
     //tabla Usuario
     public class Usuario
     {
-        //Metodos Completos query
+        //Metodos Completos query sqlclient
         public static ML.Result Add(ML.Usuario usuario)
         {
             ML.Result result = new ML.Result();
@@ -521,15 +521,16 @@ namespace BL
 
         //Entity Framework
 
-        public static ML.Result GetAllEF()
+        public static ML.Result GetAllEF(ML.Usuario usuario)
         {
             ML.Result result = new ML.Result();
             try
             {
                 using (DL_EF.HSilvaProgramacionNCapasEntities context = new DL_EF.HSilvaProgramacionNCapasEntities())
                 {
-
-                    var query = context.UsuarioGetAll().ToList();
+                    usuario.Nombre = (usuario.Nombre == null) ? "" : usuario.Nombre;
+                    usuario.ApellidoPaterno = (usuario.ApellidoPaterno == null) ? "" : usuario.ApellidoPaterno;
+                    var query = context.UsuarioGetAll(usuario.Nombre, usuario.ApellidoPaterno).ToList();
 
                     if (query != null)
                     {
@@ -537,7 +538,7 @@ namespace BL
 
                         foreach (var row in query)
                         {
-                            ML.Usuario usuario = new ML.Usuario();
+                          //  ML.Usuario usuario = new ML.Usuario();
 
                             usuario.IdUsuario = row.IdUsuario;
                             usuario.Nombre = row.Nombre;
@@ -551,7 +552,7 @@ namespace BL
                             usuario.Telefono = row.Telefono;
                             usuario.Celular = row.Celular;
                             usuario.CURP = row.CURP;
-                         // usuario.Imagen = row.Imagen;
+                            usuario.Imagen = null;
 
                             //tabla rol
                             usuario.Rol = new ML.Rol();
@@ -636,7 +637,7 @@ namespace BL
                         usuario.Telefono = query.Telefono;
                         usuario.Celular = query.Celular;
                         usuario.CURP = query.CURP;
-                       // usuario.Imagen = query.Imagen;
+                        usuario.Imagen = null;
 
                         usuario.Rol = new ML.Rol();
                         usuario.Rol.IdRol = query.IdRol.Value;
@@ -689,7 +690,7 @@ namespace BL
             {
                 using (DL_EF.HSilvaProgramacionNCapasEntities context = new DL_EF.HSilvaProgramacionNCapasEntities())
                 {
-                    int query = context.UsuarioAdd(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.FechaNacimiento, usuario.Genero, usuario.UserName,usuario.Email, usuario.Password, usuario.Telefono, usuario.Celular, usuario.CURP,  usuario.Rol.IdRol, usuario.Imagen, usuario.Direccion.Calle, usuario.Direccion.NumeroExterior, usuario.Direccion.NumeroInterior, usuario.Direccion.Colonia.IdColonia);
+                    int query = context.UsuarioAdd(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.FechaNacimiento, usuario.Genero, usuario.UserName,usuario.Email, usuario.Password, usuario.Telefono, usuario.Celular, usuario.CURP,  usuario.Rol.IdRol, null, usuario.Direccion.Calle, usuario.Direccion.NumeroExterior, usuario.Direccion.NumeroInterior, usuario.Direccion.Colonia.IdColonia);
 
                     if (query > 0)
                     {
@@ -718,7 +719,7 @@ namespace BL
             {
                 using (DL_EF.HSilvaProgramacionNCapasEntities context = new DL_EF.HSilvaProgramacionNCapasEntities())
                 {
-                    int query = context.UsuarioUpdate(usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.FechaNacimiento, usuario.Genero, usuario.UserName, usuario.Email, usuario.Password, usuario.Telefono, usuario.Celular, usuario.CURP, usuario.Rol.IdRol, usuario.Imagen, usuario.Direccion.Calle, usuario.Direccion.NumeroExterior, usuario.Direccion.NumeroInterior, usuario.Direccion.Colonia.IdColonia); ; ;
+                    int query = context.UsuarioUpdate(usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.FechaNacimiento, usuario.Genero, usuario.UserName, usuario.Email, usuario.Password, usuario.Telefono, usuario.Celular, usuario.CURP, usuario.Rol.IdRol, null, usuario.Direccion.Calle, usuario.Direccion.NumeroExterior, usuario.Direccion.NumeroInterior, usuario.Direccion.Colonia.IdColonia); ; ;
 
                     if (query > 0)
                     {

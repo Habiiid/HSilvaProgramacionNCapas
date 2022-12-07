@@ -103,7 +103,7 @@
 
                         <td> @usuario.Rol.Nombre</td>
 
-                        <td> @usuario.Imagen  </td>
+                        @*<td> @usuario.Imagen  </td>
 
                         @if (usuario.Imagen != null)
                          {
@@ -112,7 +112,7 @@
                          else
                          {
                             <td> <img id="ImagenPreview" src="~/Imagen/NoUser.jpg" width="100" height="100" /> </td>
-                         }
+                         }*@
 
                         <td class="hidden"> @usuario.Direccion.IdDireccion </td>
 

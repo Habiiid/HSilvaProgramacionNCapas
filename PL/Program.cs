@@ -39,7 +39,7 @@ namespace PL
 
                         case 1:
                             //Usuario.GetAll();
-                            Usuario.GetAllEF();
+                           // Usuario.GetAllEF();
                             //Usuario.GetAllLINQ();
                             break;
 

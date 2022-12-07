@@ -26,7 +26,8 @@ namespace DL_EF
         public string Celular { get; set; }
         public string CURP { get; set; }
         public Nullable<int> IdRol { get; set; }
-        public byte[] Imagen { get; set; }
+        public string Imagen { get; set; }
+        public Nullable<bool> Status { get; set; }
         public string NombreRol { get; set; }
         public int IdDireccion { get; set; }
         public string Calle { get; set; }

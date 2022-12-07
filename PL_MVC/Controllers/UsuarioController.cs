@@ -15,8 +15,9 @@ namespace PL_MVC.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
-            ML.Result result = BL.Usuario.GetAllEF(); //mandamos a llamar el metodo con EF
-            ML.Usuario usuario = new ML.Usuario(); //instancia         
+            ML.Usuario usuario = new ML.Usuario(); //instancia
+            ML.Result result = BL.Usuario.GetAllEF(usuario); //mandamos a llamar el metodo con EF
+                     
 
             if (result.Correct) //validacion 
             {
@@ -91,7 +92,7 @@ namespace PL_MVC.Controllers
         {
             ML.Result result = new ML.Result();
 
-            HttpPostedFileBase file = Request.Files["ImagenData"]; //busca el archivo
+           // HttpPostedFileBase file = Request.Files["ImagenData"]; //busca el archivo
 
             //if (file.ContentLength > 0) //validacion
             //{
@@ -153,16 +154,16 @@ namespace PL_MVC.Controllers
         }
 
         //metodo para agregar Imagen
-        public Byte[] ConvertToBytes(HttpPostedFileBase Imagen)
-        {
+        //public Byte[] ConvertToBytes(HttpPostedFileBase Imagen)
+        //{
             
-                byte[] data = null; //inicializamos el arreglo en null
-                System.IO.BinaryReader reader = new System.IO.BinaryReader(Imagen.InputStream); //libreria
-                data = reader.ReadBytes((int)Imagen.ContentLength); //igualamos el arreglo a la lista de bytes
+        //        byte[] data = null; //inicializamos el arreglo en null
+        //        System.IO.BinaryReader reader = new System.IO.BinaryReader(Imagen.InputStream); //libreria
+        //        data = reader.ReadBytes((int)Imagen.ContentLength); //igualamos el arreglo a la lista de bytes
 
-                return data;
+        //        return data;
               
-        }
+        //}
 
         //metodo para mostrar la imagen
 

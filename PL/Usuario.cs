@@ -9,14 +9,14 @@ namespace PL
     //Tabla Usuario
     public class Usuario
     {
-        public static void GetAllEF()  //Mostrar Todo
+        public static void GetAllEF(ML.Usuario usuario)  //Mostrar Todo
 
-        {
-            ML.Result result = BL.Usuario.GetAllEF(); 
+        {   //ML.Usuario usuario = new ML.Usuario();
+            ML.Result result = BL.Usuario.GetAllEF(usuario); 
 
             if (result.Correct)
             {
-                foreach (ML.Usuario usuario in result.Objects)
+                foreach (ML.Usuario usuario1 in result.Objects)
                 {
                     Console.WriteLine("El id del usuario es:" + usuario.IdUsuario);
                     Console.WriteLine("El nombre del usuario es:" + usuario.Nombre);

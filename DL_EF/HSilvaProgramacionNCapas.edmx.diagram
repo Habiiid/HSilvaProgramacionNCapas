@@ -18,13 +18,13 @@
         <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_DireccionColonia" />
         <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_EstadoPais" />
         <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_MunicipioEstado" />
-        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Usuario" Width="1.5" PointX="3" PointY="0.875" />
-        <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_DireccionUsuario" />
-        <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_Rol" />
         <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Producto" Width="1.5" PointX="10.25" PointY="0.75" />
         <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Proveedor" Width="1.5" PointX="10.875" PointY="4.625" />
         <AssociationConnector Association="HSilvaProgramacionNCapasModel.FK__Producto__IdDepa__06CD04F7" />
         <AssociationConnector Association="HSilvaProgramacionNCapasModel.FK__Producto__IdProv__05D8E0BE" />
+        <EntityTypeShape EntityType="HSilvaProgramacionNCapasModel.Usuario" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_DireccionUsuario" />
+        <AssociationConnector Association="HSilvaProgramacionNCapasModel.Fk_Rol" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
