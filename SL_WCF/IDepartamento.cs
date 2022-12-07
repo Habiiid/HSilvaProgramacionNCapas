@@ -16,6 +16,16 @@ namespace SL_WCF
         SL_WCF.Result GetAll();
 
         [OperationContract]
+        [ServiceKnownType(typeof(ML.Departamento))]
+        SL_WCF.Result GetById(int idDepartamento);
+
+        [OperationContract]
         SL_WCF.Result Add(ML.Departamento departamento);
+
+        [OperationContract]
+        SL_WCF.Result Update(ML.Departamento departamento);
+        
+        [OperationContract]
+        SL_WCF.Result Delete(ML.Departamento departamento);
     }
 }

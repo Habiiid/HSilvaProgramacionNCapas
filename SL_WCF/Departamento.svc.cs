@@ -17,9 +17,27 @@ namespace SL_WCF
             return new SL_WCF.Result { Correct = result.Correct, Ex = result.Ex, Message = result.Message, Object = result.Object, Objects = result.Objects };
         }
 
+        public SL_WCF.Result GetById(int idDepartamento)
+        {
+            ML.Result result = BL.Departamento.GetByIdEF(idDepartamento);
+            return new SL_WCF.Result { Correct = result.Correct, Ex = result.Ex, Message = result.Message, Object = result.Object, Objects = result.Objects };
+        }
+
         public SL_WCF.Result Add(ML.Departamento departamento)
         {
             ML.Result result = BL.Departamento.AddEF(departamento);
+            return new SL_WCF.Result { Correct = result.Correct, Ex = result.Ex, Message = result.Message, Object = result.Object, Objects = result.Objects };
+        }
+
+        public SL_WCF.Result Update(ML.Departamento departamento)
+        {
+            ML.Result result = BL.Departamento.UpdateEF(departamento);
+            return new SL_WCF.Result { Correct = result.Correct, Ex = result.Ex, Message = result.Message, Object = result.Object, Objects = result.Objects };
+        }
+
+        public SL_WCF.Result Delete(ML.Departamento departamento)
+        {
+            ML.Result result = BL.Departamento.DeleteEF(departamento);
             return new SL_WCF.Result { Correct = result.Correct, Ex = result.Ex, Message = result.Message, Object = result.Object, Objects = result.Objects };
         }
 
