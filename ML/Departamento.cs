@@ -13,5 +13,7 @@ namespace ML
         public string Nombre { get; set; }
 
         public ML.Area Area { get; set; } //es la propiedad de navegacion
+
+        public List<Object> Departamentos { get; set; }
     }
 }

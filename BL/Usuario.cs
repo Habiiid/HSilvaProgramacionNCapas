@@ -235,8 +235,10 @@ namespace BL
                                 usuario.Telefono = row[9].ToString();
                                 usuario.Celular = row[10].ToString();
                                 usuario.CURP = row[11].ToString();
+                               
                                 usuario.Rol = new ML.Rol();
                                 usuario.Rol.IdRol = int.Parse(row[12].ToString());
+                                
                                 result.Objects.Add(usuario); //boxing y unboxing
 
                             }

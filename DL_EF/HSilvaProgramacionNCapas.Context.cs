@@ -28,7 +28,6 @@ namespace DL_EF
         }
     
         public virtual DbSet<Area> Areas { get; set; }
-        public virtual DbSet<Departamento> Departamentoes { get; set; }
         public virtual DbSet<Rol> Rols { get; set; }
         public virtual DbSet<Colonia> Colonias { get; set; }
         public virtual DbSet<Direccion> Direccions { get; set; }
@@ -38,6 +37,7 @@ namespace DL_EF
         public virtual DbSet<Producto> Productoes { get; set; }
         public virtual DbSet<Proveedor> Proveedors { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Departamento> Departamentoes { get; set; }
     
         public virtual int DepartamentoAdd(string nombre, Nullable<int> idArea)
         {
@@ -50,11 +50,6 @@ namespace DL_EF
                 new ObjectParameter("IdArea", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DepartamentoAdd", nombreParameter, idAreaParameter);
-        }
-    
-        public virtual ObjectResult<DepartamentoGetAll_Result> DepartamentoGetAll()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DepartamentoGetAll_Result>("DepartamentoGetAll");
         }
     
         public virtual int DepartamentoUpdate(Nullable<int> idDepartamento, string nombre, Nullable<int> idArea)
@@ -407,6 +402,20 @@ namespace DL_EF
                 new ObjectParameter("ApellidoPaterno", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsuarioGetAll_Result>("UsuarioGetAll", nombreParameter, apellidoPaternoParameter);
+        }
+    
+        public virtual ObjectResult<DepartamentoGetAll_Result> DepartamentoGetAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DepartamentoGetAll_Result>("DepartamentoGetAll");
+        }
+    
+        public virtual ObjectResult<UsuarioGetByUserName_Result> UsuarioGetByUserName(string userName)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsuarioGetByUserName_Result>("UsuarioGetByUserName", userNameParameter);
         }
     }
 }

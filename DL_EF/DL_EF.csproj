@@ -138,6 +138,9 @@
     <Compile Include="UsuarioGetById_Result.cs">
       <DependentUpon>HSilvaProgramacionNCapas.tt</DependentUpon>
     </Compile>
+    <Compile Include="UsuarioGetByUserName_Result.cs">
+      <DependentUpon>HSilvaProgramacionNCapas.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="HSilvaProgramacionNCapas.edmx">

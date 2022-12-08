@@ -11,11 +11,9 @@ namespace DL_EF
 {
     using System;
     
-    public partial class DepartamentoGetAll_Result
+    public partial class UsuarioGetByUserName_Result
     {
-        public int IdDepartamento { get; set; }
-        public string Nombre { get; set; }
-        public Nullable<int> IdArea { get; set; }
-        public string NombreArea { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
     }
 }

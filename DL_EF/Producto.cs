@@ -23,7 +23,7 @@ namespace DL_EF
         public string Descripcion { get; set; }
         public string Imagen { get; set; }
     
-        public virtual Departamento Departamento { get; set; }
         public virtual Proveedor Proveedor { get; set; }
+        public virtual Departamento Departamento { get; set; }
     }
 }

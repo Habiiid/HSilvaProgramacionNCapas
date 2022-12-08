@@ -316,6 +316,7 @@ namespace BL
                             //tabla rol
                             departamento.Area = new ML.Area();
                             departamento.Area.IdArea = row.IdArea.Value;
+                            departamento.Area.Nombre = row.NombreArea;
 
                             result.Objects.Add(departamento); //boxing y unboxing
 
@@ -329,7 +330,7 @@ namespace BL
             {
                 result.Correct = false;
                 result.Ex = ex;
-                result.Message = "Ocurrio un error al mostrar los usuarios" + result.Ex;
+                result.Message = "Ocurrio un error al mostrar los departamentos" + result.Ex;
 
                 throw;
             }//manejo de excepciones 

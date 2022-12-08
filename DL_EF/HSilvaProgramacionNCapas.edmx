@@ -303,6 +303,9 @@
         <Function Name="UsuarioGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdUsuario" Type="int" Mode="In" />
         </Function>
+        <Function Name="UsuarioGetByUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="UsuarioUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdUsuario" Type="int" Mode="In" />
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
@@ -382,17 +385,7 @@
           </Key>
           <Property Name="IdArea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Departamentoes" Relationship="Self.Fk_Area" FromRole="Area" ToRole="Departamento" />
-        </EntityType>
-        <EntityType Name="Departamento">
-          <Key>
-            <PropertyRef Name="IdDepartamento" />
-          </Key>
-          <Property Name="IdDepartamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdArea" Type="Int32" />
-          <NavigationProperty Name="Area" Relationship="Self.Fk_Area" FromRole="Departamento" ToRole="Area" />
-          <NavigationProperty Name="Productoes" Relationship="HSilvaProgramacionNCapasModel.FK__Producto__IdDepa__06CD04F7" FromRole="Departamento" ToRole="Producto" />
+          <NavigationProperty Name="Departamentoes" Relationship="HSilvaProgramacionNCapasModel.Fk_Area" FromRole="Area" ToRole="Departamento" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -402,31 +395,13 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Usuarios" Relationship="HSilvaProgramacionNCapasModel.Fk_Rol" FromRole="Rol" ToRole="Usuario" />
         </EntityType>
-        <Association Name="Fk_Area">
-          <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Area">
-              <PropertyRef Name="IdArea" />
-            </Principal>
-            <Dependent Role="Departamento">
-              <PropertyRef Name="IdArea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="HSilvaProgramacionNCapasEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Areas" EntityType="Self.Area" />
-          <EntitySet Name="Departamentoes" EntityType="Self.Departamento" />
           <EntitySet Name="Rols" EntityType="Self.Rol" />
-          <AssociationSet Name="Fk_Area" Association="Self.Fk_Area">
-            <End Role="Area" EntitySet="Areas" />
-            <End Role="Departamento" EntitySet="Departamentoes" />
-          </AssociationSet>
           <FunctionImport Name="DepartamentoAdd">
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="IdArea" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="DepartamentoGetAll" ReturnType="Collection(HSilvaProgramacionNCapasModel.DepartamentoGetAll_Result)" />
           <FunctionImport Name="DepartamentoUpdate">
             <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -498,10 +473,6 @@
           </FunctionImport>
           <EntitySet Name="Productoes" EntityType="HSilvaProgramacionNCapasModel.Producto" />
           <EntitySet Name="Proveedors" EntityType="HSilvaProgramacionNCapasModel.Proveedor" />
-          <AssociationSet Name="FK__Producto__IdDepa__06CD04F7" Association="HSilvaProgramacionNCapasModel.FK__Producto__IdDepa__06CD04F7">
-            <End Role="Departamento" EntitySet="Departamentoes" />
-            <End Role="Producto" EntitySet="Productoes" />
-          </AssociationSet>
           <AssociationSet Name="FK__Producto__IdProv__05D8E0BE" Association="HSilvaProgramacionNCapasModel.FK__Producto__IdProv__05D8E0BE">
             <End Role="Proveedor" EntitySet="Proveedors" />
             <End Role="Producto" EntitySet="Productoes" />
@@ -566,12 +537,20 @@
             <End Role="Rol" EntitySet="Rols" />
             <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
+          <EntitySet Name="Departamentoes" EntityType="HSilvaProgramacionNCapasModel.Departamento" />
+          <AssociationSet Name="Fk_Area" Association="HSilvaProgramacionNCapasModel.Fk_Area">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="Departamento" EntitySet="Departamentoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__IdDepa__06CD04F7" Association="HSilvaProgramacionNCapasModel.FK__Producto__IdDepa__06CD04F7">
+            <End Role="Departamento" EntitySet="Departamentoes" />
+            <End Role="Producto" EntitySet="Productoes" />
+          </AssociationSet>
+          <FunctionImport Name="DepartamentoGetAll" ReturnType="Collection(HSilvaProgramacionNCapasModel.DepartamentoGetAll_Result)" />
+          <FunctionImport Name="UsuarioGetByUserName" ReturnType="Collection(HSilvaProgramacionNCapasModel.UsuarioGetByUserName_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="DepartamentoGetAll_Result">
-          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="IdArea" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="DepartamentoGetById_Result">
           <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
@@ -743,8 +722,8 @@
           <Property Name="IdDepartamento" Type="Int32" />
           <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Departamento" Relationship="HSilvaProgramacionNCapasModel.FK__Producto__IdDepa__06CD04F7" FromRole="Producto" ToRole="Departamento" />
           <NavigationProperty Name="Proveedor" Relationship="HSilvaProgramacionNCapasModel.FK__Producto__IdProv__05D8E0BE" FromRole="Producto" ToRole="Proveedor" />
+          <NavigationProperty Name="Departamento" Relationship="HSilvaProgramacionNCapasModel.FK__Producto__IdDepa__06CD04F7" FromRole="Producto" ToRole="Departamento" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -755,18 +734,6 @@
           <Property Name="Telefono" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Productoes" Relationship="HSilvaProgramacionNCapasModel.FK__Producto__IdProv__05D8E0BE" FromRole="Proveedor" ToRole="Producto" />
         </EntityType>
-        <Association Name="FK__Producto__IdDepa__06CD04F7">
-          <End Type="HSilvaProgramacionNCapasModel.Departamento" Role="Departamento" Multiplicity="0..1" />
-          <End Type="HSilvaProgramacionNCapasModel.Producto" Role="Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="IdDepartamento" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="IdDepartamento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Producto__IdProv__05D8E0BE">
           <End Type="HSilvaProgramacionNCapasModel.Proveedor" Role="Proveedor" Multiplicity="0..1" />
           <End Type="HSilvaProgramacionNCapasModel.Producto" Role="Producto" Multiplicity="*" />
@@ -895,6 +862,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdArea" Type="Int32" />
+          <NavigationProperty Name="Area" Relationship="HSilvaProgramacionNCapasModel.Fk_Area" FromRole="Departamento" ToRole="Area" />
+          <NavigationProperty Name="Productoes" Relationship="HSilvaProgramacionNCapasModel.FK__Producto__IdDepa__06CD04F7" FromRole="Departamento" ToRole="Producto" />
+        </EntityType>
+        <Association Name="Fk_Area">
+          <End Type="HSilvaProgramacionNCapasModel.Area" Role="Area" Multiplicity="0..1" />
+          <End Type="HSilvaProgramacionNCapasModel.Departamento" Role="Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="IdArea" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__IdDepa__06CD04F7">
+          <End Type="HSilvaProgramacionNCapasModel.Departamento" Role="Departamento" Multiplicity="0..1" />
+          <End Type="HSilvaProgramacionNCapasModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="DepartamentoGetAll_Result">
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IdArea" Nullable="true" />
+          <Property Type="String" Name="NombreArea" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UsuarioGetByUserName_Result">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -909,15 +920,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Departamentoes">
-            <EntityTypeMapping TypeName="HSilvaProgramacionNCapasModel.Departamento">
-              <MappingFragment StoreEntitySet="Departamento">
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Rols">
             <EntityTypeMapping TypeName="HSilvaProgramacionNCapasModel.Rol">
               <MappingFragment StoreEntitySet="Rol">
@@ -927,15 +929,6 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="DepartamentoAdd" FunctionName="HSilvaProgramacionNCapasModel.Store.DepartamentoAdd" />
-          <FunctionImportMapping FunctionImportName="DepartamentoGetAll" FunctionName="HSilvaProgramacionNCapasModel.Store.DepartamentoGetAll">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="HSilvaProgramacionNCapasModel.DepartamentoGetAll_Result">
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="DepartamentoUpdate" FunctionName="HSilvaProgramacionNCapasModel.Store.DepartamentoUpdate" />
           <FunctionImportMapping FunctionImportName="DepartamentoDelete" FunctionName="HSilvaProgramacionNCapasModel.Store.DepartamentoDelete" />
           <FunctionImportMapping FunctionImportName="DepartamentoGetById" FunctionName="HSilvaProgramacionNCapasModel.Store.DepartamentoGetById">
@@ -1213,6 +1206,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Departamentoes">
+            <EntityTypeMapping TypeName="HSilvaProgramacionNCapasModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DepartamentoGetAll" FunctionName="HSilvaProgramacionNCapasModel.Store.DepartamentoGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HSilvaProgramacionNCapasModel.DepartamentoGetAll_Result">
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="NombreArea" ColumnName="NombreArea" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UsuarioGetByUserName" FunctionName="HSilvaProgramacionNCapasModel.Store.UsuarioGetByUserName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HSilvaProgramacionNCapasModel.UsuarioGetByUserName_Result">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -12,5 +12,7 @@ namespace ML
 
         public string Nombre { get; set; }
 
+        public List<Object> Areas { get; set; }
+
     }
 }

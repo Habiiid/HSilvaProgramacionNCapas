@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Area.cs" />
     <Compile Include="Colonia.cs" />
     <Compile Include="Departamento.cs" />
     <Compile Include="Estado.cs" />
